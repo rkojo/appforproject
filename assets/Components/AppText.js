@@ -3,16 +3,15 @@ import { StyleSheet, Text } from 'react-native';
 import { Platform } from 'react-native-web';
 
 
-function AppText({children}) {
+function AppText({children, style}) {
   return (
-    <Text style = {styles.text}>
+    <Text style = {[styles.text, style]}>
       {children}
     </Text>
   );
 }
 const styles = StyleSheet.create({
   text: {
-    fontSize: 20,
     fontFamily:'normal',
   }
 })
