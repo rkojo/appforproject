@@ -7,7 +7,7 @@ import AppColor from './AppColor';
 function AppTextInput({icon, ...otherProps}) {
   return (
     <View style = {styles.container}>
-      <MaterialCommunityIcons name = {icon} size ={22}/>
+      <MaterialCommunityIcons name = {icon} size ={20}/>
       <TextInput style = {styles.input} {...otherProps}/>
     </View>
   );

@@ -12,7 +12,11 @@ function AppView({children, style}) {
 const styles = StyleSheet.create({
   screen: {
     flex:1,
-    marginTop: Constants.statusBarHeight
+    padding: 0,
+    marginTop: 0,
+    marginLeft: '1%',
+    marginRight: '1%',
+    
   }
 })
 export default AppView;

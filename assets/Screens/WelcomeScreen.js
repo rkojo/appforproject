@@ -5,9 +5,10 @@ import AppIcon from '../Components/AppIcon';
 import AppText from '../Components/AppText';
 import Constants from 'expo-constants';
 import AppButton from '../Components/AppButton';
+import {useNavigation} from '@react-navigation/native';
 
 
-function WelcomeScreen(props) {
+function WelcomeScreen({navigation}) {
   return (
     <View style = {styles.container}>
         <View style = {styles.textcontainer}>
@@ -23,12 +24,12 @@ function WelcomeScreen(props) {
           <Text style = {styles.buttontext}>Sign up to use memories</Text>
       <AppButton style = {styles.registerbutton}
       title={"Register"}
-      onPress ={() =>console.log("register pressed")}
+      onPress ={() =>navigation.navigate("Register")}
       />
       <Text style = {styles.buttontext}>Already have an account?</Text>
       <AppButton style = {styles.loginbutton}
       title = {"Login"}
-      OnPress = {() =>console.log("login pressed.")}
+      onPress ={() =>navigation.navigate("Login")}
       />
       </View>
       <View style = {styles.bottom}>
@@ -41,8 +42,9 @@ function WelcomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    marginTop: 0,
     backgroundColor: AppColor.fourthColor,
+
   },
   title: {
     fontSize: 50,
@@ -66,18 +68,18 @@ const styles = StyleSheet.create({
   },
   buttons: {
     width: '100%',
-    height: '30%',
-    marginTop: 100,
+    height: '40%',
+    marginTop: 60,
     marginBottom: 50,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     backgroundColor: AppColor.thirdColor,
   },
   registerbutton: {
-    marginTop: 50,
+    marginTop: 20,
     marginBottom: 30,
   },
   loginbutton: {
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 50,
   },
   buttontext: {
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
   benefits: {
     justifyContent: 'space-around',
     width: '100%',
-    height: '15%',
+    height: '10%',
     backgroundColor: AppColor.thirdColor,
   }
 

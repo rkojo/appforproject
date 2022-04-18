@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text  } from 'react-native';
+import {StyleSheet, View, Text, Image  } from 'react-native';
 import AppText from '../Components/AppText';
 import AppTextInput from '../Components/AppTextInput';
 import {Formik} from 'formik';
@@ -7,6 +7,11 @@ import AppView from '../Components/AppView';
 import AppButton from '../Components/AppButton';
 import AppColor from '../Components/AppColor';
 import * as Yup from 'yup';
+import AppData from '../Settings/AppData';
+import HomeNavigation from '../Navigation/HomeNavigation'
+import { NavigationContainer } from '@react-navigation/native';
+import users from '../Settings/AppData';
+import currentUser from '../Settings/User';
 //schema for yup
 const schema = Yup.object().shape(
   {
@@ -15,7 +20,20 @@ const schema = Yup.object().shape(
     name: Yup.string().required("Name is required"),
   }
 )
-function RegisterScreen(props) {
+
+
+const newRegister = (name, email, password, image)  => {
+  users.addUser(name, email, password, image);
+  //console.log(data);
+}
+
+
+const getLength = () => {
+  return users.getLength();
+}
+
+function RegisterScreen({navigation}) {
+
 
   return (
     <AppView>
@@ -26,8 +44,18 @@ function RegisterScreen(props) {
 
       <View style = {styles.forms}>
       <Formik 
-        initialValues={{name: ' ', email:' ', password: ' ',}}
-        onSubmit = {values => console.log(values)}
+        initialValues={{name: ' ', email:' ', password: ' ' }}
+        onSubmit = {values => {
+          console.log("before"+ values.name + values.email + values.password);
+         
+            navigation.navigate('RegImage', {
+                        message: (getLength()),
+                        name: values.name,
+                        email: values.email,
+                        password: values.password,
+            });
+          }
+      }
         validationSchema = {schema}
         >
                 {({handleChange, handleSubmit, errors}) => (
@@ -60,6 +88,7 @@ function RegisterScreen(props) {
               onChangeText = {handleChange("password")}
             />
             <AppText>{errors.password}</AppText>
+
             <AppButton title= 'Register' onPress={handleSubmit}/>
             </>
             )}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text } from 'react-native';
+import {View, StyleSheet, Text, Alert } from 'react-native';
 import AppColor from '../Components/AppColor';
 import AppText from '../Components/AppText';
 import AppTextInput from '../Components/AppTextInput';
@@ -7,6 +7,11 @@ import AppView from '../Components/AppView';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import AppButton from '../Components/AppButton';
+import { useReducer } from 'react/cjs/react.production.min';
+import AppData from '../Settings/AppData';
+import { NavigationContainer } from '@react-navigation/native';
+import users from '../Settings/AppData';
+import currentUser from '../Settings/User';
 
 const schema = Yup.object().shape(
   {
@@ -15,7 +20,32 @@ const schema = Yup.object().shape(
   }
 )
 
-function LoginScreen(props) {
+//used to find if the details are true
+const validate = (email, password) => {
+  let id = users.getID(email)
+  if(id >= 0) {
+  console.log(id +"  " +  users.getLength());
+  if(users.getUserPassword(id) == password) {
+    return true;
+  } else {
+    return false;
+  }
+} else {
+  return 'error';
+}
+  
+} 
+//used to send id to account screen.
+const find = (email) => {
+  let value =  users.getID(email);
+  if(value >= 0) {
+    return value
+  } else {
+    return "Error"
+  }
+}
+
+function LoginScreen({navigation}) {
   return (
     <AppView>
       <AppView>
@@ -26,7 +56,24 @@ function LoginScreen(props) {
       <View style = {styles.forms}>
       <Formik 
         initialValues={{email:' ', password: ' ',}}
-        onSubmit = {values => console.log(values)}
+        onSubmit = {values => {
+                console.log("Pre = " +values.email);
+                if(validate(values.email, values.password)) {
+                  currentUser.updateall(users.getID(values.email),values.email, users.getName(users.getID(values.email))),
+                  navigation.navigate("Home", { 
+                    screen: 'Account',
+                    params: {
+                        screen: 'Main',
+                        params: {
+                            message: find(values.email),
+                        }
+                    }
+                }); 
+            } else {
+              Alert.alert("Error", "Wrong Username or password");
+          }
+        }
+      }
         validationSchema = {schema}
         >
                 {({handleChange, handleSubmit, errors}) => (
