@@ -7,9 +7,6 @@ import AppView from '../Components/AppView';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import AppButton from '../Components/AppButton';
-import { useReducer } from 'react/cjs/react.production.min';
-import AppData from '../Settings/AppData';
-import { NavigationContainer } from '@react-navigation/native';
 import users from '../Settings/AppData';
 import currentUser from '../Settings/User';
 
@@ -49,22 +46,27 @@ function LoginScreen({navigation}) {
   return (
     <AppView>
       <AppView>
+      {/** Title*/}
       <View style = {styles.textcontainer}>
       <Text style = {styles.title}>Login for</Text>
       <Text style = {styles.title}>your memories!</Text>
       </View>
       <View style = {styles.forms}>
+        {/** formik to use*/}
       <Formik 
         initialValues={{email:' ', password: ' ',}}
         onSubmit = {values => {
                 console.log("Pre = " +values.email);
                 if(validate(values.email, values.password)) {
-                  currentUser.updateall(users.getID(values.email),values.email, users.getName(users.getID(values.email))),
+                  //if password is the same, it updates the current user and then navigates. current user is static until logged in or registered again. 
+                  let userID = users.getID(values.email);
+                  currentUser.updateall(userID,values.email, users.getName(userID),users.getImage(userID)),
                   navigation.navigate("Home", { 
                     screen: 'Account',
                     params: {
                         screen: 'Main',
                         params: {
+                          //sends id (incase currentuser has problems)
                             message: find(values.email),
                         }
                     }
@@ -78,6 +80,7 @@ function LoginScreen({navigation}) {
         >
                 {({handleChange, handleSubmit, errors}) => (
         <>
+        {/**input for email and passwords */}
           <AppTextInput 
               placeholder='Email Address'
               style = {styles.input}
@@ -110,27 +113,26 @@ const styles = StyleSheet.create({
   textcontainer: {
     width: '100%',
     height: '20%',
-    backgroundColor: AppColor.black,
+    marginTop: 50,
 },
 title: {
   fontSize: 40,
   textAlign: 'left',
   fontWeight: 'bold',
-  color: AppColor.white,
+  color: AppColor.secondaryColor,
 },
 input: {
   fontSize: 20,
 },
 forms: {
-  marginTop:'25%',
+  marginTop:'10%',
   width: '100%',
-  height: '50%',
-  justifyContent: 'space-around',
-  backgroundColor: AppColor.primaryColor,
+  height: '70%',
+  justifyContent: 'space-evenly',
 },
 button: {
-  marginTop: '25%',
-  marginBottom: '10%',
+  marginTop: '5%',
+  marginBottom: '20%',
 }
 })
 export default LoginScreen;

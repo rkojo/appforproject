@@ -16,7 +16,7 @@ function AppButton({title, onPress, style}) {
 
 const styles = StyleSheet.create({
   button:{
-    backgroundColor: AppColor.secondaryColor,
+    backgroundColor: AppColor.primaryColor,
     borderRadius: 20,
     padding: 15, 
     width: '100%',

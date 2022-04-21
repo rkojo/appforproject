@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { View, FlatList, Text, StyleSheet, Image, TouchableHighlight, Alert, Button, Modal, TouchableOpacity } from 'react-native';
 import { Dimensions } from 'react-native';
@@ -6,36 +5,30 @@ import { useState } from 'react';
 import AppColor from '../Components/AppColor';
 import AppView from '../Components/AppView';
 import users from '../Settings/AppData';
-import { get, getPixelSizeForLayoutSize } from 'react-native/Libraries/Utilities/PixelRatio';
-import AppButton from '../Components/AppButton';
-import AppTextInput from '../Components/AppTextInput';
-import * as ImagePicker from 'expo-image-picker';
 import currentUser from '../Settings/User';
 
+//get initial list based on the user.
 const getMemory = (id) => {
   return users.getMemory(id);
 }
 
 function MemoriesScreen({navigation, route}) {
   
+  //alert function to confirm deletion, if yes, it moves to deleteproper
   const deleteAsk = (id) => {
     Alert.alert('Delete?', 'Are you sure you want to delete this memory? (This cannot be reverted)', 
     [{text: 'No',},{text: 'Yes', onPress: () => deleteProper(id)}], {cancelable: true,});
-    console.log(id);
   }
 
   const [list, setList] = useState(getMemory(currentUser.showUser()));
   const[refreshing, setRefreshing] = useState(false);
 
+  //function to delete
   const deleteProper = (id) => {
-    //setList();
     let changelist = users.deleteMemory(id);
     setList(changelist);
-    //setRefreshing(true);
-    console.log(list);
-
   }
-
+//refresh for flatlist
   const getMem = () => {
     //setRefreshing(true);
     return users.getMemory(currentUser.id);
@@ -45,6 +38,7 @@ function MemoriesScreen({navigation, route}) {
     
 
     <AppView>
+      {/** flatlist showing the pictures*/}
       <FlatList
       style = {styles.list}
       numColumns={3}
@@ -73,14 +67,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   images: {
+    //allows images to be shown 3 in a row and 5 columns. 9 used for border.
     width: (Dimensions.get('window').width/3)-9,
     height: Dimensions.get('window').height/5,
     margin: 3,
   },
   listView: {
-    // width: '30%',
-    // maxHeight: '10%',
-    // backgroundColor: AppColor.fifthColor,
   }
 })
 

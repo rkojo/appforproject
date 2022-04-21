@@ -4,10 +4,10 @@ import { StyleSheet, Image, View } from 'react-native';
 import AppColor from './AppColor';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
-function AppIcon({name, size = 40, color = AppColor.white, style, width = 50,height = 50}) {
+function AppIcon({name, size = 40, color = AppColor.white, style, width = 50,height = 50, backgroundColor =  AppColor.secondaryColor,}) {
 
   return (
-    <View style = {[styles.container, style, height = {height}, width = {width}]}>
+    <View style = {[styles.container, style, height = {height}, width = {width}, backgroundColor = {backgroundColor}]}>
     <MaterialCommunityIcons
         name = {name}
         size = {size}
@@ -18,7 +18,6 @@ function AppIcon({name, size = 40, color = AppColor.white, style, width = 50,hei
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: AppColor.secondaryColor,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',

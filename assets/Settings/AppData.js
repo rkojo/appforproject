@@ -4,17 +4,17 @@ import currentUser from './User';
 class AppData{
 
   constructor() {
-    //this.data =  [[0, 'test', 'email@email.com', 'password']]
+    //data used to keep people data. Will clear once it exits the app.
     this.data = [
       { id: 0,
         name: 'test',
         email: 'email@email.com',
         password: 'password',
-        image: "",
+        image: require('../images/user.bmp'),
         //require('../images/user.bmp'),
        }
     ]
-
+    //book data - id = photoid , userid - who owns the photo, name and image.
     this.memories = [
       {id: 0,
       userid: 0,
@@ -63,12 +63,10 @@ class AppData{
               image: require('../images/sample9.png'),
               },
     ]
-  // var instanceuser = [[0, 'test', 'email@email.com', 'password']];
   }
 
-
+//add user to data. 
   addUser(name, email, password, image) {
-    //this.data[this.data.length] = ([this.data.length, name, email, password]);
     this.data.push({id: this.data.length,
                      name: name, 
                     email: email,
@@ -76,36 +74,35 @@ class AppData{
                     image: image,})
   }
 
+  //return length of data
   getLength() {
     return this.data.length;
   }
-  static getInstance() {
-    if(this.length <= 1) {
-      AppData.data = new AppData();
-      Object.freeze(data);
-    } 
-    return this.data;
-  }
-
+  //return name of user 
   getName(id) {
     return this.data[id].name;
   }
-
+  //return email of user
   getEmail(id) {
     return this.data[id].email;
   }
-
+  //return image of user
+  getImage(id) {
+    return this.data[id].image;
+  }
+  //return password of the user
   getUserPassword(id) {
     return this.data[id].password;
   }
+  //return id of user based on email - used in login
   getID(email) {
     return this.data.findIndex((user) => user.email === email);
     }
-  
+  //return memories based on the id
   getMemory(id) {
     return this.memories.filter((photos) => photos.userid === id);
   }
-
+  //add photo to memories db
   addMemory(photo, userid, name) {
     this.memories.push({
       id: this.memories.length,
@@ -115,7 +112,7 @@ class AppData{
     })
     console.log(this.memories[this.memories.length-1]);
   }
-
+  //edit name of memory
   editMemname(id, name) {
     let memid = this.memories.findIndex(memories => {
       if(memories.id == id) {
@@ -124,7 +121,7 @@ class AppData{
     });
     this.memories[memid].name = name;
   }
-
+  //delete memory
   deleteMemory(id) {
     if(this.memories.length <= 1 ) {
       return [];

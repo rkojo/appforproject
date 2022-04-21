@@ -1,9 +1,9 @@
 export default {
-  primaryColor: '#7BB1FD', //naples yellow
-  secondaryColor: '#FD7CB2',  // azure (blue)
-  thirdColor: '#B2FD7C', //sizzling red
-  fourthColor: '#E84855', //cameo pink
-  fifthColor: '#EFBCD5', //dark liver
+  primaryColor: '#0D63E3',  //blue
+  secondaryColor: '#000000',  // pink
+  thirdColor: '#0DE323', //green
+  fourthColor: '#E38D0D', //orange
+  fifthColor: 'rgba(214, 250 , 33, 0.15)', //background colour
   black: '#000000',
   white: '#ffffff',
 }

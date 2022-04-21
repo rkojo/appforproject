@@ -1,12 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import AccountScreen from '../Screens/AccountScreen';
-import LoginScreen from '../Screens/LoginScreen';
-import RegisterScreen from '../Screens/RegisterScreen';
-import WelcomeScreen from '../Screens/WelcomeScreen';
-import InformationScreen from '../Screens/InformationScreen';
+
 import MemoriesScreen from '../Screens/MemoriesScreen'
-import HomeNavigation from './HomeNavigation';
 import AccountNavigation from './AccountNavigation';
 import AddScreen from '../Screens/AddScreen';
 import currentUser from '../Settings/User';

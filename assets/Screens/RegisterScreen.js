@@ -7,11 +7,8 @@ import AppView from '../Components/AppView';
 import AppButton from '../Components/AppButton';
 import AppColor from '../Components/AppColor';
 import * as Yup from 'yup';
-import AppData from '../Settings/AppData';
-import HomeNavigation from '../Navigation/HomeNavigation'
-import { NavigationContainer } from '@react-navigation/native';
 import users from '../Settings/AppData';
-import currentUser from '../Settings/User';
+
 //schema for yup
 const schema = Yup.object().shape(
   {
@@ -20,14 +17,7 @@ const schema = Yup.object().shape(
     name: Yup.string().required("Name is required"),
   }
 )
-
-
-const newRegister = (name, email, password, image)  => {
-  users.addUser(name, email, password, image);
-  //console.log(data);
-}
-
-
+//length of users array - used as id
 const getLength = () => {
   return users.getLength();
 }
@@ -47,7 +37,7 @@ function RegisterScreen({navigation}) {
         initialValues={{name: ' ', email:' ', password: ' ' }}
         onSubmit = {values => {
           console.log("before"+ values.name + values.email + values.password);
-         
+         //passes everything to registerimage, which later adds to array with image.
             navigation.navigate('RegImage', {
                         message: (getLength()),
                         name: values.name,
@@ -105,23 +95,22 @@ const styles = StyleSheet.create({
   textcontainer: {
       width: '100%',
       height: '20%',
-      backgroundColor: AppColor.black,
+      marginTop: 0,
   },
   title: {
     fontSize: 40,
     textAlign: 'left',
     fontWeight: 'bold',
-    color: AppColor.white,
+    color: AppColor.secondaryColor
   },
   input: {
     fontSize: 20,
   },
   forms: {
-    marginTop:'15%',
+    marginTop:'5%',
     width: '100%',
-    height: '60%',
-    justifyContent: 'space-around',
-    backgroundColor: AppColor.primaryColor,
+    height: '65%',
+    justifyContent: 'space-evenly',
   }
 })
 export default RegisterScreen;

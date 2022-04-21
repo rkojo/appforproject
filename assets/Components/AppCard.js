@@ -4,9 +4,10 @@ import AppColor from './AppColor';
 import AppText from './AppText';
 import { useState } from 'react';
 
-function AppCard({image, title, subtitle}) {
+//appcard used in account screen
+function AppCard({image, title, subtitle, style}) {
   return (
-    <View style = {styles.container}>
+    <View style = {[styles.container, style]}>
       {isFinite(image)? <Image 
         style = {styles.image}
         source = {image}
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 20,
     marginBottom: 10, 
-    backgroundColor: AppColor.primaryColor,
+    backgroundColor: AppColor.thirdColor,
     height: '20%',
     width: '100%',
   },
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     textAlign: 'center',
+    color: AppColor.white,
   },
   subtitle: {
     fontSize: 10,

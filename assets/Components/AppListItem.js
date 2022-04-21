@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
 import AppColor from './AppColor';
 import AppText from './AppText';
+
 function AppListItem({image, title, IconComponent, onPress, style}) {
   return (
     <TouchableHighlight onPress = {onPress} underlayColor = {AppColor.fourthColor} style = {style}>
@@ -28,9 +29,12 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 5,
+    textAlignVertical: 'center',
     textAlign: 'center',
     alignItems: 'center',
-    fontSize: 30,
+    fontWeight: 'bold',
+    fontSize: 35,
+    color: AppColor.secondaryColor,
   },
 
 })
